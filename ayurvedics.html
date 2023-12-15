@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayurvedic Remedies</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .main-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .remedy-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .remedy {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 300px;
+      width: 100%;
+      position: relative;
+    }
+
+    .remedy:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .remedy img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .remedy h3 {
+      color:  #de0c0ce1;
+    }
+
+    .remedy-details {
+      opacity: 0;
+      margin-top: 10px;
+      transition: opacity 0.5s ease;
+    }
+
+    .remedy:hover .remedy-details {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ayurvedic Products</h1>
+    <p>Explore natural Ayurvedic products which can be used in many of your home remedies</p>
+  </header>
+
+  <div class="main-content">
+    <div class="remedy-list" id="remedyList">
+      <!-- Ayurvedic remedies will be dynamically added here -->
+    </div>
+  </div>
+
+  <script>
+    // Sample data for Ayurvedic remedies
+    const ayurvedicRemedies = [
+      { name: 'Turmeric', image: 'https://static.toiimg.com/thumb/resizemode-4,width-1280,height-720,msid-66636383/66636383.jpg',details:'Turmeric is known for its anti-inflammatory properties. It can be used to alleviate various health issues, such as arthritis and digestive problems.' },
+      { name: 'Amla (Indian Gooseberry)', image: 'https://vidhyanjalionline.com/cdn/shop/products/amla_79630812-ca04-494f-9fc6-e3b6d664e6b2_514x514.jpg?v=1632642593', details: 'Amla is rich in Vitamin C and antioxidants. It promotes hair health, boosts immunity, and aids in digestion.' },
+      { name: 'Neem', image: 'https://purensoselect.in/cdn/shop/products/neem-tulsi-fragrance-oil-625.webp?v=1676385830', details: 'Neem is a powerful herb with antibacterial and antifungal properties. It is used for skin issues, dental care, and as a blood purifier.' },
+      { name: 'Ashwagandha', image: 'https://mangalorespice.com/cdn/shop/products/HR_01-02_2048x.jpg?v=1540659052', details: 'Ashwagandha (Withania somnifera) is a traditional rasayana remedy of Ayurveda, a term used to describe longevity tonics or herbs that promote well-being, balanced energy levels, and overall good health. Ashwagandha is considered the king of herbs ' },
+      { name: 'Ginger', image: 'https://static.toiimg.com/photo/74757781.cms', details: ' It is been used to aid digestion, reduce nausea, and help fight the flu and common cold, to name a few of its purposes The unique fragrance and flavor of ginger come from its natural oils, the most important of which is gingerol.' },
+      { name: 'Black Pepper', image: 'https://origin.club/media/catalog/product/cache/86eaafd287624d270d87c663dd3976d5/b/l/black_pepper_1.jpg', details: 'has a load of health benefits and a major benefit of consuming pepper is that it aids in weight loss. It is also said to be good for digestion and prevents cancer by detoxifying the body.' },
+      { name: 'Cumin', image: 'https://coloradospice.com/cdn/shop/articles/Colorado_Spice_Cumin_Blog_Photo_2048x.png?v=1613408640', details: 'it reduce inflammation, increase urination, prevent gas, and suppress muscle spasms. It has also been used as an aid for indigestion, jaundice, diarrhea, and flatulence. ' },
+      { name: 'Shatavari', image: 'https://5.imimg.com/data5/SELLER/Default/2023/9/341916283/PO/YO/IX/488295/asparagus-racemosus-shatavari.jpg', details: 'Shatavari increases the production of prolactin, a hormone that is important for breastfeeding. Hormone balancing. Shatavari has been used to attempt to treat conditions related to hormone imbalance such as polycystic ovarian syndrome ( PCOS) and infertility. Reduce symptoms of menopause.' },
+      { name: 'Honey', image: 'https://5.imimg.com/data5/XB/PL/MY-23856090/natural-honey.jpg', details: 'Honey has many beneficial properties, like treating infections, fighting metabolic syndrome, preventing artery hardening, and supporting a healthy gut. Honey may become an alternative to antibiotics. Honey also contains some nutrients.' },
+      { name: 'Cardamom', image: 'https://m.media-amazon.com/images/I/41fFDO48gsL._AC_UF1000,1000_QL80_.jpg', details: 'ating Cardamom daily can be beneficial to your overall health. It can help support digestive health, circulation, and the respiratory system. It can also help reduce inflammation as it is a good source of antioxidants. ' },
+       // Add more Ayurvedic remedies as needed
+    ];
+
+    const remedyList = document.getElementById('remedyList');
+
+    ayurvedicRemedies.forEach(remedy => {
+      const remedyElement = document.createElement('div');
+      remedyElement.classList.add('remedy');
+      
+      remedyElement.innerHTML = `
+        <img src="${remedy.image}" alt="${remedy.name}">
+        <h3>${remedy.name}</h3>
+        <div class="remedy-details">${remedy.details}</div>
+      `;
+
+      remedyList.appendChild(remedyElement);
+    });
+  </script>
+</body>
+</html>

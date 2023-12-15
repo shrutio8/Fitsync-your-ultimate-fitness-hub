@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Composition Analysis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #de0c0ce1;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 8px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Body Composition Analysis</h1>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight">
+
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter your height">
+
+        <button onclick="calculateComposition()">Calculate</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateComposition() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                alert('Please enter valid weight and height values.');
+                return;
+            }
+
+            const bodyFatPercentage = (weight / height) * 2;
+            const muscleMass = weight - bodyFatPercentage;
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <p>Body Fat Percentage: ${bodyFatPercentage.toFixed(2)}%</p>
+                <p>Muscle Mass: ${muscleMass.toFixed(2)} kg</p>
+                <!-- Add more metrics here as needed -->
+            `;
+        }
+    </script>
+</body>
+</html>

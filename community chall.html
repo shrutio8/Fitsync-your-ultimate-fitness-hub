@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Challenges</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 80%;
+        }
+
+        h1 {
+            color: #de0c0ce1 ;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        label {
+            margin: 10px 0;
+            color: #de0c0cf9;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #de0c0ce1;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: black;
+        }
+
+        #challenges {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .challenge-card {
+            background-color: #de0c0ce1;
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: left;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .challenge-card:hover {
+            transform: scale(1.05);
+        }
+
+        .challenge-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .challenge-card p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Workout Challenges</h1>
+        
+        <form id="challengeForm">
+            <label for="challengeName">Challenge Name:</label>
+            <input type="text" id="challengeName" placeholder="Enter challenge name" required>
+
+            <label for="challengeDescription">Challenge Description:</label>
+            <textarea id="challengeDescription" placeholder="Enter challenge description" required></textarea>
+
+            <label for="challengeDuration">Challenge Duration (days):</label>
+            <input type="number" id="challengeDuration" placeholder="Enter challenge duration" required>
+
+            <button type="button" onclick="createChallenge()">Create Challenge</button>
+        </form>
+
+        <div id="challenges">
+            <!-- Dynamic display of challenges will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function createChallenge() {
+            const challengeName = document.getElementById('challengeName').value;
+            const challengeDescription = document.getElementById('challengeDescription').value;
+            const challengeDuration = document.getElementById('challengeDuration').value;
+
+            if (!challengeName || !challengeDescription || !challengeDuration || challengeDuration <= 0) {
+                alert('Please fill in all fields with valid values.');
+                return;
+            }
+
+            const challengeCard = document.createElement('div');
+            challengeCard.classList.add('challenge-card');
+            challengeCard.innerHTML = `
+                <h2>${challengeName}</h2>
+                <p>${challengeDescription}</p>
+                <p>Duration: ${challengeDuration} days</p>
+            `;
+
+            document.getElementById('challenges').appendChild(challengeCard);
+
+            // Optional: Clear form fields after creating a challenge
+            document.getElementById('challengeForm').reset();
+        }
+    </script>
+</body>
+</html>
